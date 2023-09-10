@@ -11,5 +11,9 @@
       "cache": false,
       "persistent": true
     }
-  }
+  },
+  "globalEnv": [
+    "DISCORD_CLIENT_ID",
+    "DISCORD_CLIENT_SECRET"
+  ]
 }
