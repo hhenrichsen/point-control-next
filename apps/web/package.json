@@ -26,5 +26,11 @@
     "tsconfig": "workspace:*",
     "typescript": "^4.5.3"
   },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "eslint-config-custom/next"
+    ]
+  },
   "prettier": "prettier-config"
 }
