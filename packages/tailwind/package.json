@@ -32,5 +32,6 @@
     "extends": [
       "eslint-config-custom/library"
     ]
-  }
+  },
+  "prettier": "prettier-config"
 }
