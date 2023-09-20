@@ -6,14 +6,14 @@ export default function Auth(): JSX.Element {
     return (
       <>
         Signed in as {session.user?.email} <br />
-        <button onClick={() => signOut()}>Sign out</button>
+        <button onClick={void (async () => signOut())} type="button" >Sign out</button>
       </>
     );
   }
   return (
     <>
       Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
+      <button onClick={void (async () => signIn())} type="button" >Sign in</button>
     </>
   );
 }
