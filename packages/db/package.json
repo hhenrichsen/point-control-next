@@ -10,7 +10,8 @@
     "format": "prettier --check \"**/*.{mjs,ts,md,json}\"",
     "typecheck": "tsc --noEmit",
     "db:generate": "pnpm withenv prisma generate",
-    "db:push": "pnpm withenv prisma db push --skip-generate"
+    "db:push": "pnpm withenv prisma db push --skip-generate",
+    "db:makemigration": "pnpm withenv prisma migrate dev"
   },
   "dependencies": {
     "@prisma/client": "^5.3.0",
