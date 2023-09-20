@@ -18,6 +18,9 @@
     },
     "lint": {},
     "db:generate": {
+      "inputs": [
+        "packages/db/lib/prisma/schema.prisma"
+      ],
       "outputs": [
         "packages/db/lib/generated"
       ]
