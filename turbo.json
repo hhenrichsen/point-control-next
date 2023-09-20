@@ -11,6 +11,9 @@
       "dependsOn": ["^db:generate"]
     },
     "lint": {},
+    "db:deploy": {
+      "cache": false
+    },
     "db:generate": {
       "inputs": ["packages/db/lib/prisma/schema.prisma"],
       "outputs": ["packages/db/lib/generated"]
