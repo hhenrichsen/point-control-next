@@ -11,6 +11,9 @@
       "dependsOn": ["^db:generate"]
     },
     "lint": {},
+    "db:studio": {
+      "persistent": true
+    },
     "db:deploy": {
       "cache": false
     },
