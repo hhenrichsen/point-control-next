@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit",
     "db:generate": "pnpm withenv prisma generate",
     "db:push": "pnpm withenv prisma db push --skip-generate",
+    "db:studio": "pnpm withenv prisma studio",
     "db:makemigration": "pnpm withenv prisma migrate dev",
     "db:deploy": "pnpm withenv prisma migrate deploy"
   },

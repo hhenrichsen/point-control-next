@@ -10,7 +10,8 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "db:generate": "turbo run db:generate",
     "db:push": "turbo run db:push",
-    "db:deploy": "turbo run db:deploy"
+    "db:deploy": "turbo run db:deploy",
+    "db:studio": "turbo run db:studio"
   },
   "devDependencies": {
     "eslint": "^8.48.0",
