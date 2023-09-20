@@ -1,9 +1,11 @@
 import { SessionProvider } from "next-auth/react";
+import type { Session } from "next-auth";
+import type { AppProps } from "next/app";
 
 export default function App({
   Component,
   pageProps: { session, ...pageProps },
-}): JSX.Element {
+}: AppProps<{ session: Session }>): JSX.Element {
   return (
     <SessionProvider session={session}>
       <Component {...pageProps} />
