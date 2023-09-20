@@ -1,6 +1,8 @@
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth"
 import type { OAuthConfig } from "next-auth/providers";
 import DiscordProvider from "next-auth/providers/discord";
+import { prisma } from 'db/lib/prisma';
 
 const { DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET, NEXTAUTH_SECRET } = process.env;
 
@@ -9,6 +11,7 @@ if (!NEXTAUTH_SECRET) {
 }
 
 export const authOptions = {
+    adapter: PrismaAdapter(prisma),
     providers: [
         DISCORD_CLIENT_ID && DISCORD_CLIENT_SECRET && DiscordProvider({
             clientId: DISCORD_CLIENT_ID,
