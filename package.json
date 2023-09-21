@@ -11,7 +11,8 @@
     "db:generate": "turbo run db:generate",
     "db:push": "turbo run db:push",
     "db:deploy": "turbo run db:deploy",
-    "db:studio": "turbo run db:studio"
+    "db:studio": "turbo run db:studio",
+    "prebuild": "pnpm run db:generate"
   },
   "devDependencies": {
     "eslint": "^8.48.0",

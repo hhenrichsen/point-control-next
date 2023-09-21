@@ -18,8 +18,8 @@
       "cache": false
     },
     "db:generate": {
-      "inputs": ["packages/db/lib/prisma/schema.prisma"],
-      "outputs": ["packages/db/lib/generated"]
+      "inputs": ["packages/db/prisma/schema.prisma"],
+      "outputs": ["packages/db/lib"]
     },
     "db:push": {
       "cache": false
