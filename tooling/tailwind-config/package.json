@@ -5,7 +5,8 @@
   "main": "index.ts",
   "files": [
     "index.ts",
-    "postcss.js"
+    "postcss.js",
+    "tailwind.ts"
   ],
   "scripts": {
     "clean": "rm -rf .turbo node_modules",

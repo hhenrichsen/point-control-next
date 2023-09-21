@@ -13,7 +13,9 @@ export function Card({
 }): JSX.Element {
   return (
     <a
-      className={className}
+      className={`${
+        className ? className : "bg-slate-400 inline-block rounded-md p-4"
+      }`}
       href={`${href}?utm_source=create-turbo&utm_medium=basic&utm_campaign=create-turbo"`}
       rel="noopener noreferrer"
       target="_blank"
