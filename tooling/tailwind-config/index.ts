@@ -1,9 +1,2 @@
-import type {Config} from "tailwindcss";
-
-export default {
-    content: [""],
-    theme: {
-        extend: {},
-    },
-    plugins: [],
-} satisfies Config;
+export * as tailwind from "./tailwind";
+export * as postcss from "./postcss";

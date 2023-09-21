@@ -25,6 +25,9 @@ importers:
       '@prisma/nextjs-monorepo-workaround-plugin':
         specifier: ^5.3.1
         version: 5.3.1
+      autoprefixer:
+        specifier: ^10.4.15
+        version: 10.4.15(postcss@8.4.29)
       db:
         specifier: workspace:^
         version: link:../../packages/db
@@ -40,6 +43,12 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
+      tailwind-config:
+        specifier: workspace:*
+        version: link:../../tooling/tailwind-config
+      tailwindcss:
+        specifier: 3.3.2
+        version: 3.3.2
       ui:
         specifier: workspace:*
         version: link:../../packages/ui
@@ -138,6 +147,13 @@ importers:
         version: 5.2.2
 
   packages/ui:
+    dependencies:
+      tailwind-config:
+        specifier: workspace:*
+        version: link:../../tooling/tailwind-config
+      tailwindcss:
+        specifier: 3.3.2
+        version: 3.3.2
     devDependencies:
       '@turbo/gen':
         specifier: ^1.10.12
