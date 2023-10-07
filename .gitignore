@@ -38,3 +38,4 @@ yarn-error.log*
 # IntelliJ / WebStorm
 .idea/
 packages/db/lib/generated
+playwright-report
