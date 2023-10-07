@@ -1,5 +1,5 @@
 {
-  "name": "tailwind-config",
+  "name": "@pointcontrol/tailwind-config",
   "version": "0.0.0",
   "private": true,
   "main": "index.ts",
@@ -21,18 +21,18 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "eslint": "^8.49.0",
-    "eslint-config-custom": "workspace:*",
+    "@pointcontrol/eslint-config-custom": "*",
+    "@pointcontrol/prettier-config": "*",
+    "@pointcontrol/tsconfig": "*",
+    "eslint": "^8.48.0",
     "prettier": "^3.0.3",
-    "prettier-config": "workspace:*",
-    "tsconfig": "workspace:*",
     "typescript": "^5.2.2"
   },
   "eslintConfig": {
     "root": true,
     "extends": [
-      "eslint-config-custom/library"
+      "@pointcontrol/eslint-config-custom/library"
     ]
   },
-  "prettier": "prettier-config"
+  "prettier": "@pointcontrol/prettier-config"
 }

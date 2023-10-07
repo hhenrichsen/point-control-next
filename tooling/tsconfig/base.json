@@ -16,6 +16,8 @@
     "skipLibCheck": true,
     "strict": true,
     "strictNullChecks": true,
+    "downlevelIteration": true,
+    "incremental": true,
     "paths": {
       "@ui/*": ["../../packages/ui/*"],
       "@db/*": ["../../packages/db/*"]
