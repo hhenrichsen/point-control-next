@@ -1,0 +1,37 @@
+{
+  "name": "@pointcontrol/{{ name }}",
+  "private": true,
+  "version": "0.0.0",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "src/*"
+      ]
+    }
+  },
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules",
+    "lint": "eslint .",
+    "format": "prettier --check \"**/*.{js,jsx,cjs,mjs,prisma,ts,tsx,md,json}\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@pointcontrol/eslint-config-custom": "*",
+    "@pointcontrol/prettier-config": "*",
+    "@pointcontrol/tsconfig": "*",
+    "eslint": "^8.50.0",
+    "typescript": "^5.2.2"
+  },
+  "eslintConfig": {
+	"root": true,
+    "extends": [
+      "@pointcontrol/eslint-config/base"
+    ]
+  },
+  "prettier": "@pointcontrol/prettier-config"
+}
