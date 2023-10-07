@@ -1,0 +1,24 @@
+{
+  "name": "@pointcontrol/status-codes",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {
+    "format": "prettier --check \"**/*.{js,jsx,cjs,mjs,prisma,ts,tsx,md,json}\""
+  },
+  "devDependencies": {
+    "@pointcontrol/eslint-config-custom": "*",
+    "@pointcontrol/prettier-config": "*",
+    "@pointcontrol/tsconfig": "*",
+    "eslint": "^8.48.0",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@pointcontrol/eslint-config-custom/library"
+    ]
+  },
+  "prettier": "@pointcontrol/prettier-config"
+}
