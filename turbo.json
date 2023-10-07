@@ -24,7 +24,7 @@
       "dependsOn": ["^db:generate"]
     },
     "db:generate": {
-      "inputs": ["packages/db/prisma/schema.prisma"]
+      "inputs": ["prisma/**"]
     },
     "test": {
       "dependsOn": ["^db:generate"]
