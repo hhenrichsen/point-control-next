@@ -8,10 +8,16 @@
     },
     "lint": {},
     "format": {},
-    "db:push": {},
-    "db:studio": {},
+    "db:push": {
+      "cache": false
+    },
+    "db:studio": {
+      "cache": false
+    },
     "db:makemigration": {},
-    "db:deploy": {},
+    "db:deploy": {
+      "cache": false
+    },
     "dev": {
       "cache": false,
       "persistent": true,
@@ -19,6 +25,12 @@
     },
     "db:generate": {
       "inputs": ["packages/db/prisma/schema.prisma"]
+    },
+    "test": {
+      "dependsOn": ["^db:generate"]
+    },
+    "test:e2e": {
+      "dependsOn": ["^db:generate"]
     }
   },
   "globalEnv": [
@@ -27,6 +39,7 @@
     "DISCORD_CLIENT_ID",
     "DISCORD_CLIENT_SECRET",
     "NEXTAUTH_URL",
-    "NEXTAUTH_SECRET"
+    "NEXTAUTH_SECRET",
+    "CI"
   ]
 }

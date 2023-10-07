@@ -13,7 +13,10 @@
     "lint:fix": "turbo lint --continue -- --fix --cache --cache-location node_modules/.cache/.eslintcache && manypkg fix",
     "db:generate": "turbo run db:generate",
     "db:studio": "turbo run db:studio",
-    "db:push": "turbo run db:push"
+    "db:deploy": "turbo run db:deploy",
+    "db:push": "turbo run db:push",
+    "test": "turbo run test",
+    "test:e2e": "turbo run test:e2e"
   },
   "packageManager": "pnpm@8.6.10",
   "pnpm": {
