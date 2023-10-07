@@ -1,8 +1,7 @@
-import { SessionProvider } from "next-auth/react";
-import type { Session } from "next-auth";
 import type { AppProps } from "next/app";
-
-import "ui/global.css";
+import type { Session } from "next-auth";
+import { SessionProvider } from "next-auth/react";
+import "@ui/global.css";
 
 export default function App({
   Component,

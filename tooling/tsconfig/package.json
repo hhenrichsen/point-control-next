@@ -1,5 +1,5 @@
 {
-  "name": "tsconfig",
+  "name": "@pointcontrol/tsconfig",
   "version": "0.0.0",
   "private": true,
   "publishConfig": {

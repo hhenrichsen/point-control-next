@@ -1,4 +1,3 @@
 module.exports = {
-  ...require("tailwind-config/tailwind"),
+  ...require("@pointcontrol/tailwind-config/tailwind"),
 };
-

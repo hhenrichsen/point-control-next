@@ -1,39 +1,35 @@
 {
-  "name": "db",
+  "name": "@pointcontrol/db",
   "version": "0.0.0",
   "private": true,
-  "main": "index.ts",
   "scripts": {
     "withenv": "dotenv -e ../../.env --",
-    "clean": "rm -rf .turbo node_modules",
-    "lint": "eslint .",
-    "format": "prettier --check \"**/*.{mjs,ts,md,json}\"",
-    "typecheck": "tsc --noEmit",
+    "format": "prettier --check \"**/*.{js,jsx,cjs,mjs,prisma,ts,tsx,md,json}\"",
     "db:generate": "pnpm withenv prisma generate",
-    "db:push": "pnpm withenv prisma db push --skip-generate",
+    "db:push": "pnpm withenv prisma db push",
     "db:studio": "pnpm withenv prisma studio",
     "db:makemigration": "pnpm withenv prisma migrate dev",
     "db:deploy": "pnpm withenv prisma migrate deploy"
   },
   "dependencies": {
-    "@prisma/client": "^5.3.0",
+    "@prisma/client": "^5.3.1",
     "dotenv-cli": "^7.3.0"
   },
   "devDependencies": {
-    "@types/node": "^20.6.0",
-    "eslint": "^8.49.0",
-    "eslint-config-custom": "workspace:*",
+    "@pointcontrol/eslint-config-custom": "*",
+    "@pointcontrol/prettier-config": "*",
+    "@pointcontrol/tsconfig": "*",
+    "@types/node": "^20.6.2",
+    "eslint": "^8.48.0",
     "prettier": "^3.0.3",
-    "prettier-config": "workspace:*",
-    "prisma": "^5.3.0",
-    "tsconfig": "workspace:*",
+    "prisma": "^5.3.1",
     "typescript": "^5.2.2"
   },
   "eslintConfig": {
     "root": true,
     "extends": [
-      "eslint-config-custom/library"
+      "@pointcontrol/eslint-config-custom/library"
     ]
   },
-  "prettier": "prettier-config"
+  "prettier": "@pointcontrol/prettier-config"
 }

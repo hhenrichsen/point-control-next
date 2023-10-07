@@ -2,33 +2,31 @@
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
   "pipeline": {
-    "dev": {
-      "dependsOn": ["^db:generate"],
-      "cache": false,
-      "persistent": true
-    },
     "build": {
-      "dependsOn": ["^db:generate"]
+      "dependsOn": ["^db:generate"],
+      "outputs": [".next/**", "!.next/cache/**"]
     },
     "lint": {},
-    "db:studio": {
-      "persistent": true
-    },
-    "db:deploy": {
-      "cache": false
+    "format": {},
+    "db:push": {},
+    "db:studio": {},
+    "db:makemigration": {},
+    "db:deploy": {},
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["^db:generate"]
     },
     "db:generate": {
-      "inputs": ["packages/db/prisma/schema.prisma"],
-      "outputs": ["packages/db/lib"]
-    },
-    "db:push": {
-      "cache": false
+      "inputs": ["packages/db/prisma/schema.prisma"]
     }
   },
   "globalEnv": [
+    "DATABASE_URL",
+    "PORT",
     "DISCORD_CLIENT_ID",
     "DISCORD_CLIENT_SECRET",
-    "NEXTAUTH_SECRET",
-    "NEXTAUTH_URL"
+    "NEXTAUTH_URL",
+    "NEXTAUTH_SECRET"
   ]
 }

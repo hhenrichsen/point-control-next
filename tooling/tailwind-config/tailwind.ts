@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 import * as animate from "tailwindcss-animate";
 
+// eslint-disable-next-line import/no-default-export -- Tailwind expects a default export
 export default {
   darkMode: ["class"],
   content: [

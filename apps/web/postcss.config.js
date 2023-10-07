@@ -1,1 +1,1 @@
-module.exports = {...require("tailwind-config/postcss")};
+module.exports = { ...require("@pointcontrol/tailwind-config/postcss") };

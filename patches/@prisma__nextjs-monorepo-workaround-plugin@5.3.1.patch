@@ -1,0 +1,12 @@
+diff --git a/index.js b/index.js
+index 3374a401aa72d9fad517104e60973f5d0b321f5e..67a537a6e28787e015d269ee813042d7181e4c4e 100644
+--- a/index.js
++++ b/index.js
+@@ -138,6 +138,7 @@ class PrismaPlugin {
+       const asyncActions = Object.entries(fromDestPrismaMap).map(async ([from, dest]) => {
+         // only copy if file doesn't exist, necessary for watch mode
+         if ((await fs.access(dest).catch(() => false)) === false) {
++          await fs.mkdir(path.dirname(dest), { recursive: true });
+           return fs.copyFile(from, dest)
+         }
+       })
