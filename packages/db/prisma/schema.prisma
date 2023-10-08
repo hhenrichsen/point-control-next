@@ -37,13 +37,19 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
+  id              String           @id @default(cuid())
+  name            String?
+  email           String?          @unique
+  emailVerified   DateTime?
+  image           String?
+  accounts        Account[]
+  sessions        Session[]
+  lifetimeTags    Int
+  memberships     GameMembership[] /// The games this user is a member of
+  games           Game[] /// The games this user owns
+  codes           TagCode[]
+  checkedOutItems GameCheckout[]
+  awards          GameAwardee[]
 }
 
 model VerificationToken {
@@ -52,4 +58,176 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Game {
+  id              String           @id @default(cuid()) @db.VarChar(32)
+  slug            String           @unique @db.VarChar(64)
+  name            String
+  description     String
+  location        String
+  ownerId         String           @db.VarChar(32)
+  owner           User             @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  public          Boolean
+  discordGuildId  String?          @db.VarChar(32)
+  created         DateTime         @default(now())
+  updated         DateTime         @updatedAt
+  defaultRoleId   String           @unique @db.VarChar(32)
+  defaultRole     GameRole         @relation("default", fields: [defaultRoleId], references: [id])
+  roles           GameRole[]       @relation("roles")
+  members         GameMembership[]
+  teams           Team[]
+  tagCodes        TagCode[]
+  posts           GamePost[]
+  events          GameEvent[]
+  items           GameItem[]
+  checkedOutItems GameCheckout[]
+  awards          GameAward[]
+
+  @@index([slug])
+  @@index([ownerId])
+}
+
+model GameAward {
+  id          String        @id @default(cuid()) @db.VarChar(32)
+  name        String
+  description String
+  game        Game?         @relation(fields: [gameId], references: [id], onDelete: SetNull)
+  gameId      String?       @db.VarChar(32)
+  silver      Int
+  gold        Int
+  diamond     Int
+  obsidian    Int
+  awardees    GameAwardee[]
+}
+
+model GameAwardee {
+  id      String    @id @default(cuid()) @db.VarChar(32)
+  awardId String    @db.VarChar(32)
+  award   GameAward @relation(fields: [awardId], references: [id], onDelete: Cascade)
+  count   Int
+  userId  String    @db.VarChar(32)
+  user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+enum GamePermission {
+  ADMIN
+  EDIT
+  PLAY
+  VIEW
+}
+
+model GameRole {
+  id          String           @id @default(cuid()) @db.VarChar(32)
+  name        String
+  color       String           @db.VarChar(8)
+  position    Int
+  permissions GamePermission[]
+  gameId      String           @db.VarChar(32)
+  game        Game             @relation("roles", fields: [gameId], references: [id], onDelete: Cascade)
+  members     GameMembership[]
+  defaultGame Game?            @relation("default")
+
+  @@index([gameId])
+}
+
+model Team {
+  id            String           @id @default(cuid()) @db.VarChar(32)
+  name          String
+  slug          String           @db.VarChar(64)
+  color         String           @db.VarChar(8)
+  gameId        String           @db.VarChar(32)
+  game          Game             @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  points        Int
+  members       GameMembership[] @relation("team")
+  fakeMembers   GameMembership[] @relation("fakeTeam")
+  discordRoleId String           @db.VarChar(32)
+
+  @@unique([gameId, slug])
+  @@index([gameId])
+}
+
+model GameMembership {
+  id          String    @id @default(cuid()) @db.VarChar(32)
+  gameId      String    @db.VarChar(32)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String    @db.VarChar(32)
+  game        Game      @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  roleId      String    @db.VarChar(32)
+  role        GameRole  @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  teamId      String    @db.VarChar(32)
+  team        Team      @relation("team", fields: [teamId], references: [id], onDelete: Restrict)
+  fakeTeamId  String?   @db.VarChar(32)
+  fakeTeam    Team?     @relation("fakeTeam", fields: [fakeTeamId], references: [id], onDelete: SetNull)
+  approved    Boolean
+  requestDate DateTime?
+  joined      DateTime
+
+  @@index([gameId])
+  @@index([userId])
+}
+
+model GamePost {
+  id      String @id @default(cuid()) @db.VarChar(32)
+  gameId  String @db.VarChar(32)
+  game    Game   @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  content String
+}
+
+model TagCode {
+  id     Int    @id @default(autoincrement())
+  code   String @unique @db.VarChar(8)
+  gameId String @db.VarChar(32)
+  game   Game   @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  userId String @db.VarChar(32)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([code])
+  @@index([userId])
+}
+
+enum GameEventType {
+  TAG
+  EDIT
+}
+
+/// Used to represent things that happen in a game, like players moving teams
+/// or points being captured.
+model GameEvent {
+  id       Int           @id @default(autoincrement())
+  gameId   String        @db.VarChar(32)
+  game     Game          @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  type     GameEventType
+  occurred DateTime      @default(now())
+  meta     Json          @db.JsonB
+
+  @@index([gameId])
+}
+
+model GameItem {
+  id           String         @id @default(cuid()) @db.VarChar(32)
+  gameId       String         @db.VarChar(32)
+  game         Game           @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  name         String
+  quantity     Int
+  GameCheckout GameCheckout[]
+
+  @@index([gameId])
+}
+
+model GameCheckout {
+  id           String    @id @default(cuid()) @db.VarChar(32)
+  gameId       String    @db.VarChar(32)
+  game         Game      @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  inventoryId  String    @db.VarChar(32)
+  inventory    GameItem  @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
+  userId       String    @db.VarChar(32)
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  checkedOutAt DateTime
+  checkedInAt  DateTime?
+
+  @@index([gameId])
+  @@index([userId])
 }
