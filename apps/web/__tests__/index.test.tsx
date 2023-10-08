@@ -5,6 +5,6 @@ import Home from "../pages/index";
 test("Should have a heading", () => {
   render(<Home />);
   expect(
-    screen.getByRole("heading", { level: 1, name: "PointControl" }),
+    screen.getByRole("heading", { level: 1, name: "hvz.gg" }),
   ).toBeDefined();
 });
