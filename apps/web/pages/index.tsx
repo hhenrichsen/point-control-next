@@ -7,6 +7,13 @@ export default function Home(): JSX.Element {
       <Link className="text-blue-500" href="/games/">
         Game List
       </Link>
+
+      <p>
+        If you are seeing this page, join us on{" "}
+        <a className="text-blue-500" href="https://discord.gg/SYurS4m2aR">
+          Discord
+        </a>
+      </p>
     </>
   );
 }
