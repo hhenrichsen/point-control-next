@@ -16,6 +16,7 @@
     "@auth/prisma-adapter": "^1.0.2",
     "@playwright/test": "^1.38.1",
     "@pointcontrol/api": "*",
+    "@pointcontrol/auth": "*",
     "@pointcontrol/db": "*",
     "@pointcontrol/status-codes": "*",
     "@pointcontrol/ui": "*",

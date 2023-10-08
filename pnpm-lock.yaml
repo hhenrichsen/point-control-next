@@ -42,6 +42,9 @@ importers:
       '@pointcontrol/api':
         specifier: '*'
         version: link:../../packages/api
+      '@pointcontrol/auth':
+        specifier: '*'
+        version: link:../../packages/auth
       '@pointcontrol/db':
         specifier: '*'
         version: link:../../packages/db
@@ -164,6 +167,37 @@ importers:
       prettier:
         specifier: ^3.0.3
         version: 3.0.3
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+
+  packages/auth:
+    dependencies:
+      '@auth/prisma-adapter':
+        specifier: ^1.0.2
+        version: 1.0.2(@prisma/client@5.3.1)
+      '@pointcontrol/db':
+        specifier: '*'
+        version: link:../db
+      next:
+        specifier: ^13.4.19
+        version: 13.4.19(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)
+      next-auth:
+        specifier: ^4.23.1
+        version: 4.23.1(next@13.4.19)(react-dom@18.2.0)(react@18.2.0)
+    devDependencies:
+      '@pointcontrol/eslint-config-custom':
+        specifier: '*'
+        version: link:../../tooling/eslint-config-custom
+      '@pointcontrol/prettier-config':
+        specifier: '*'
+        version: link:../../tooling/prettier-config
+      '@pointcontrol/tsconfig':
+        specifier: '*'
+        version: link:../../tooling/tsconfig
+      eslint:
+        specifier: ^8.48.0
+        version: 8.49.0
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
