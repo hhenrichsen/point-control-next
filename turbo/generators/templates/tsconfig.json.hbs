@@ -1,5 +1,18 @@
 {
-  "extends": "@pointcontrol/tsconfig/base.json",
-  "include": ["*.ts", "src"],
-  "exclude": ["node_modules"]
+  "extends": "@pointcontrol/tsconfig/react-library.json",
+  "include": [
+    "."
+  ],
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "paths": {
+      "@*": [
+        "./*"
+      ]
+    }
+  }
 }

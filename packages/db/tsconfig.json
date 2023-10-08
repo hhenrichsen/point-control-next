@@ -1,5 +1,10 @@
 {
   "extends": "@pointcontrol/tsconfig/base.json",
   "include": ["."],
-  "exclude": ["node_modules", "lib/generated"]
+  "exclude": ["node_modules", "lib/generated"],
+  "compilerOptions": {
+    "paths": {
+      "@*": ["./*"]
+    }
+  }
 }
