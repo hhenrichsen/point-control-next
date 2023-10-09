@@ -165,6 +165,7 @@ model GameMembership {
   requestDate DateTime?
   joined      DateTime
 
+  @@unique([userId, gameId])
   @@index([gameId])
   @@index([userId])
 }
