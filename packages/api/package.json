@@ -15,6 +15,9 @@
     "@pointcontrol/db": "*",
     "@trpc/client": "^10.38.4",
     "@trpc/server": "^10.38.3",
+    "inversify": "^6.0.1",
+    "inversify-inject-decorators": "^3.1.0",
+    "reflect-metadata": "^0.1.13",
     "slug": "^8.2.3",
     "zod": "^3.22.2"
   },
