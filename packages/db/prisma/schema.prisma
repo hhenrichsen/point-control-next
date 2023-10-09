@@ -83,6 +83,7 @@ model Game {
   items           GameItem[]
   checkedOutItems GameCheckout[]
   awards          GameAward[]
+  rules           TagRule[]
 
   @@index([slug])
   @@index([ownerId])
@@ -144,6 +145,8 @@ model Team {
   members       GameMembership[] @relation("team")
   fakeMembers   GameMembership[] @relation("fakeTeam")
   discordRoleId String           @db.VarChar(32)
+  rules         TagRule[]        @relation("taggerTeam")
+  teamValues    TagRule[]        @relation("teamValue")
 
   @@unique([gameId, slug])
   @@index([gameId])
@@ -231,4 +234,25 @@ model GameCheckout {
 
   @@index([gameId])
   @@index([userId])
+}
+
+enum TagRuleType {
+  ADD_POINTS
+  SET_TEAM
+  SET_TAGGER_TEAM
+  EXCHANGE_TEAM
+  DISALLOW
+}
+
+model TagRule {
+  id          Int         @id @default(autoincrement())
+  gameId      String      @db.VarChar(32)
+  game        Game        @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  teamId      String?     @db.VarChar(32)
+  team        Team?       @relation("taggerTeam", fields: [teamId], references: [id], onDelete: Cascade) /// The team doing the tagging
+  type        TagRuleType
+  value       Int?
+  teamValueId String?     @db.VarChar(32)
+  teamValue   Team?       @relation("teamValue", fields: [teamValueId], references: [id]) /// Used by SET_TEAM and SET_TAGGER_TEAM
+  order       Int         @default(0)
 }
