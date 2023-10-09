@@ -44,7 +44,7 @@ model User {
   image           String?
   accounts        Account[]
   sessions        Session[]
-  lifetimeTags    Int
+  lifetimeTags    Int              @default(0)
   memberships     GameMembership[] /// The games this user is a member of
   games           Game[] /// The games this user owns
   codes           TagCode[]
@@ -72,8 +72,8 @@ model Game {
   discordGuildId  String?          @db.VarChar(32)
   created         DateTime         @default(now())
   updated         DateTime         @updatedAt
-  defaultRoleId   String           @unique @db.VarChar(32)
-  defaultRole     GameRole         @relation("default", fields: [defaultRoleId], references: [id])
+  defaultRoleId   String?          @unique @db.VarChar(32)
+  defaultRole     GameRole?        @relation("default", fields: [defaultRoleId], references: [id])
   roles           GameRole[]       @relation("roles")
   members         GameMembership[]
   teams           Team[]
