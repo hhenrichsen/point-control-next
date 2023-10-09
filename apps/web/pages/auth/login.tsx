@@ -5,7 +5,7 @@ export default function Auth(): JSX.Element {
   if (session) {
     return (
       <>
-        Signed in as {session.user?.email} <br />
+        Signed in as {session.user.email} <br />
         <button onClick={() => void signOut()} type="button">
           Sign out
         </button>

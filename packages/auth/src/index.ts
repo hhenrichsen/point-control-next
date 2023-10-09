@@ -4,7 +4,7 @@ import type {
   NextApiResponse,
 } from "next/types";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import type { NextAuthOptions } from "next-auth";
+import type { NextAuthOptions, Session } from "next-auth";
 import { getServerSession } from "next-auth";
 import type { OAuthConfig } from "next-auth/providers";
 import DiscordProvider from "next-auth/providers/discord";
@@ -31,6 +31,17 @@ export const authOptions = {
       item: OAuthConfig<unknown> | undefined | "",
     ): item is OAuthConfig<unknown> => Boolean(item),
   ),
+  callbacks: {
+    session: ({ session, user }) => {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: user.id,
+        },
+      };
+    },
+  },
   secret: NEXTAUTH_SECRET,
 } satisfies NextAuthOptions;
 
@@ -39,6 +50,6 @@ export function auth(
     | [GetServerSidePropsContext["req"], GetServerSidePropsContext["res"]]
     | [NextApiRequest, NextApiResponse]
     | []
-): ReturnType<typeof getServerSession> {
+): Promise<Session | null> {
   return getServerSession(...args, authOptions);
 }
