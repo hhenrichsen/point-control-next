@@ -3,12 +3,15 @@ import * as animate from "tailwindcss-animate";
 
 // eslint-disable-next-line import/no-default-export -- Tailwind expects a default export
 export default {
-  darkMode: ["class"],
+  darkMode: "class",
   content: [
     "../../packages/ui/components/**/*.{js,jsx,ts,tsx}",
     "../../apps/web/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    fontFamily: {
+      display: ["Inter", "sans-serif"],
+    },
     container: {
       center: true,
       padding: "2rem",
@@ -24,12 +27,12 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "var(--primary)",
+          foreground: "var(--primary-foreground)",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "var(--secondary)",
+          foreground: "var(--secondary-foreground)",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
