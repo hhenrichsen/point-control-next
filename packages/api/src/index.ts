@@ -25,6 +25,10 @@ export const appRouter = router({
           description: input.description,
           location: input.location,
           public: input.public ?? false,
+          approval: input.approval ?? false,
+        },
+        select: {
+          slug: true,
         },
       });
 

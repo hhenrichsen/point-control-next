@@ -19,7 +19,6 @@ import type { CreateGame } from "@pointcontrol/types";
 import { createGameSchema } from "@pointcontrol/types";
 import { useRouter } from "next/navigation";
 import { type BaseSyntheticEvent } from "react";
-import type { Game } from "@pointcontrol/db/lib/generated/client";
 import { trpcClient } from "../../util/trpc";
 
 export default function CreateGameForm(): JSX.Element {
@@ -42,8 +41,8 @@ export default function CreateGameForm(): JSX.Element {
   ): Promise<void> {
     event?.preventDefault();
     try {
-      const game: Game = await trpcClient.createGame.mutate(values);
-      router.push(`/games/${game.slug}`);
+      const { slug } = await trpcClient.createGame.mutate(values);
+      router.push(`/games/${slug}`);
     } catch (e) {
       // TODO: Handle error
     }
