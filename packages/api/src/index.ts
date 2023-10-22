@@ -1,5 +1,4 @@
 import { TRPCError } from "@trpc/server";
-import * as z from "zod";
 import slug from "slug";
 import { createGameSchema } from "@pointcontrol/types";
 import { authedProcedure, router } from "./trpc";
