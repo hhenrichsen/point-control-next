@@ -1,29 +1,16 @@
 import { TRPCError } from "@trpc/server";
 import * as z from "zod";
 import slug from "slug";
-import { publicProcedure, router } from "./trpc";
+import { createGameSchema } from "@pointcontrol/types";
+import { authedProcedure, router } from "./trpc";
 
 export const appRouter = router({
-  createGame: publicProcedure
-    .input(
-      z.object({
-        title: z.string(),
-        slug: z.string().min(3).max(64).optional(),
-        description: z.string(),
-        location: z.string(),
-        public: z.boolean().optional(),
-      }),
-    )
+  createGame: authedProcedure
+    .input(createGameSchema)
     .mutation(async ({ ctx, input }) => {
-      const { session, prisma } = ctx;
-      if (!session) {
-        throw new TRPCError({
-          code: "UNAUTHORIZED",
-          message: "You must be logged in to create a game.",
-        });
-      }
+      const { auth, prisma } = ctx;
 
-      const gameSlug: string = input.slug ?? slug(input.title);
+      const gameSlug: string = slug(input.title);
       if (gameSlug.length < 3 || gameSlug.length > 64) {
         throw new TRPCError({
           code: "BAD_REQUEST",
@@ -33,7 +20,7 @@ export const appRouter = router({
 
       const game = await prisma.game.create({
         data: {
-          ownerId: session.user.id,
+          ownerId: auth.userId,
           name: input.title,
           slug: gameSlug,
           description: input.description,

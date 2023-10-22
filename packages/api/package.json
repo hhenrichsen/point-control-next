@@ -11,8 +11,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@pointcontrol/auth": "*",
+    "@clerk/nextjs": "^4.25.6",
     "@pointcontrol/db": "*",
+    "@pointcontrol/types": "^0.0.0",
     "@trpc/client": "^10.38.4",
     "@trpc/server": "^10.38.3",
     "inversify": "^6.0.1",
@@ -22,6 +23,7 @@
     "zod": "^3.22.2"
   },
   "devDependencies": {
+    "@clerk/backend": "^0.31.2",
     "@pointcontrol/eslint-config-custom": "*",
     "@pointcontrol/prettier-config": "*",
     "@pointcontrol/tsconfig": "*",
