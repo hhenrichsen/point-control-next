@@ -5,8 +5,8 @@
   "scripts": {
     "withenv": "dotenv -e ../../.env --",
     "dev": "cross-env NODE_OPTIONS=\"--require reflect-metadata\" pnpm withenv next dev",
-    "build": "cross-env NODE_OPTIONS=\"--require reflect-metadata\" next build",
-    "start": "cross-env NODE_OPTIONS=\"--require reflect-metadata\" next start",
+    "build": "cross-env NODE_OPTIONS=\"--require reflect-metadata\" pnpm withenv next build",
+    "start": "cross-env NODE_OPTIONS=\"--require reflect-metadata\" pnpm withenv next start",
     "lint": "next lint",
     "format": "prettier --check \"**/*.{js,jsx,cjs,mjs,prisma,ts,tsx,md,json}\"",
     "test:e2e": "cross-env NODE_OPTIONS=\"--require reflect-metadata\" NODE_ENV=test pnpm withenv playwright test",

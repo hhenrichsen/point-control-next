@@ -72,6 +72,9 @@ jobs:
       - name: Check Format
         run: pnpm format
 
+      - name: Generate database
+        run: pnpm run db:generate
+
       - name: Build
         run: pnpm build
 
