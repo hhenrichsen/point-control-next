@@ -9,7 +9,7 @@ jobs:
     name: Build and Run Tests (Preview)
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.38.0-jammy
+      image: ubuntu
     services:
       postgres:
         image: postgres
@@ -82,13 +82,6 @@ jobs:
 
       - name: Run e2e tests
         run: pnpm test:e2e
-
-      - uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: playwright-report
-          path: apps/web/playwright-report/
-          retention-days: 30
 
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
