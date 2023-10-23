@@ -85,4 +85,4 @@ jobs:
         run: pnpm test
 
       - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt -token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
