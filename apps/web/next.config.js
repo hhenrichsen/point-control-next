@@ -11,4 +11,7 @@ module.exports = {
     }
     return config;
   },
+  experimental: {
+    instrumentationHook: true,
+  },
 };
