@@ -15,14 +15,14 @@ export default function RootLayout({
       <html
         className="min-h-screen"
         lang="en"
-        style={{ height: "100%", overflow: "hidden" }}
+        style={{ height: "100%", overflowY: "hidden" }}
         suppressHydrationWarning
       >
         <body
           className="m-0 flex flex-col bg-slate-200 dark:bg-slate-800"
-          style={{ height: "100%", overflow: "hidden" }}
+          style={{ height: "100%", overflowY: "hidden" }}
         >
-          <div style={{ height: "100%", overflow: "scroll" }}>
+          <div style={{ height: "100%", overflowY: "auto" }}>
             <header className="sticky top-0 flex items-center justify-between bg-slate-50 text-slate-950 shadow-md dark:bg-slate-950 dark:text-slate-50">
               <Link href="/" style={{ textDecoration: "none" }}>
                 <h1 className="m-0 p-4 text-xl font-bold text-slate-950 dark:text-slate-50">
