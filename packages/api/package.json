@@ -8,7 +8,8 @@
     "clean": "rm -rf .turbo node_modules",
     "lint": "eslint .",
     "format": "prettier --check \"**/*.{js,jsx,cjs,mjs,prisma,ts,tsx,md,json}\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "pnpm run withenv vitest"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.25.6",
@@ -20,10 +21,12 @@
     "inversify-inject-decorators": "^3.1.0",
     "reflect-metadata": "^0.1.13",
     "slug": "^8.2.3",
+    "vitest": "^0.34.6",
     "zod": "^3.22.2"
   },
   "devDependencies": {
     "@clerk/backend": "^0.31.2",
+    "@faker-js/faker": "^8.2.0",
     "@pointcontrol/eslint-config-custom": "*",
     "@pointcontrol/prettier-config": "*",
     "@pointcontrol/tsconfig": "*",

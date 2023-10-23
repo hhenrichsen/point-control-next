@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { faker } from "@faker-js/faker";
 import { container } from "tsyringe";
-import { UserWebhookHandler } from "./route";
+import { UserWebhookHandler } from "./userwebhookhandler";
 import { NullUserWebhookAuthorizer } from "./nulluserwebhookauthorizer";
 
 // @vitest-environment node
