@@ -66,6 +66,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Generate database
+        run: pnpm run db:generate
+
       - name: Lint
         run: pnpm lint
 
