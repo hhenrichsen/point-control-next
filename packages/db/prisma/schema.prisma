@@ -11,8 +11,8 @@ datasource db {
 
 model User {
   id              String           @id
+  email           String           @unique
   name            String?
-  email           String?          @unique
   terms           DateTime?
   image           String?
   lifetimeTags    Int              @default(0)
