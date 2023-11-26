@@ -1,9 +1,56 @@
 import { TRPCError } from "@trpc/server";
 import slug from "slug";
-import { createGameSchema } from "@pointcontrol/types";
-import { authedProcedure, router } from "./trpc";
+import { type PublicGame, createGameSchema } from "@pointcontrol/types";
+import * as z from "zod";
+import { authedProcedure, publicProcedure, router } from "./trpc";
+
+const PublicGameFields = {
+  id: true,
+  slug: true,
+  name: true,
+  description: true,
+  location: true,
+  created: true,
+  updated: true,
+};
 
 export const appRouter = router({
+  publicGames: publicProcedure
+    .input(z.object({ page: z.number() }).optional())
+    .query(async ({ ctx, input }): Promise<PublicGame[]> => {
+      const { auth, prisma } = ctx;
+      if (auth?.userId) {
+        return prisma.game.findMany({
+          where: {
+            OR: [
+              {
+                public: true,
+              },
+              {
+                ownerId: auth.userId,
+              },
+            ],
+          },
+          skip: (input?.page ?? 0) * 10,
+          take: 10,
+          orderBy: {
+            updated: "desc",
+          },
+          select: PublicGameFields,
+        });
+      }
+      return prisma.game.findMany({
+        where: {
+          public: true,
+        },
+        skip: (input?.page ?? 0) * 10,
+        take: 10,
+        orderBy: {
+          updated: "desc",
+        },
+        select: PublicGameFields,
+      });
+    }),
   createGame: authedProcedure
     .input(createGameSchema)
     .mutation(async ({ ctx, input }) => {
@@ -27,9 +74,7 @@ export const appRouter = router({
           public: input.public ?? false,
           approval: input.approval ?? false,
         },
-        select: {
-          slug: true,
-        },
+        select: PublicGameFields,
       });
 
       return game;

@@ -7,9 +7,6 @@
       }
     ],
     "strictNullChecks": true,
-    "paths": {
-      "@*": ["./*"]
-    },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },

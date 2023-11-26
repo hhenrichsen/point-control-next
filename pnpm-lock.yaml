@@ -58,7 +58,7 @@ importers:
         specifier: '*'
         version: link:../../packages/status-codes
       '@pointcontrol/types':
-        specifier: ^0.0.0
+        specifier: '*'
         version: link:../../packages/types
       '@pointcontrol/ui':
         specifier: '*'
