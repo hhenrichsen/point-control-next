@@ -71,8 +71,11 @@ jobs:
       - name: Check Format
         run: pnpm format
 
-      - name: Build
-        run: pnpm build
+      - uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: pnpm build
 
       - name: Run migrations
         run: pnpm db:deploy
