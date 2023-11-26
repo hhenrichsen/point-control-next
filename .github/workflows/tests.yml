@@ -88,4 +88,4 @@ jobs:
         run: pnpm test
 
       - name: Trigger Vercel Deploy
-        run: vercel deploy --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel alias $(vercel deploy --token=${{ secrets.VERCEL_TOKEN }}) staging.hvz.gg --token=${{ secrets.VERCEL_TOKEN }}
