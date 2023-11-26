@@ -29,7 +29,7 @@ export default function GameList(): JSX.Element {
       {loading ? (
         <div className="items-begin flex w-full max-w-prose flex-col rounded-md bg-slate-50 p-8 dark:bg-slate-900">
           <Skeleton className="h-[28px] w-full rounded-full" />
-          <Skeleton className="h-[20px] w-[80px] rounded-full bg-slate-500" />
+          <Skeleton className="h-[20px] w-[80px] rounded-full" />
           <Skeleton className="h-[24px] max-w-[200px] rounded-full" />
         </div>
       ) : null}
