@@ -81,14 +81,11 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Build Project Artifacts
-        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
-
       - name: Run migrations
         run: pnpm db:deploy
 
       - name: Run unit tests
         run: pnpm test
 
-      - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Trigger Vercel Deploy
+        run: vercel deploy --token=${{ secrets.VERCEL_TOKEN }}
