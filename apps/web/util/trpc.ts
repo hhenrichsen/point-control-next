@@ -28,7 +28,7 @@ const links = [
 
 export const trpc = createTRPCNext<AppRouter>({
   config() {
-    return { links };
+    return { links, transformer: superjson };
   },
   /**
    * {@link https://trpc.io/docs/ssr}
