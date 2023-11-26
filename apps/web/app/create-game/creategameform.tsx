@@ -18,7 +18,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import type { CreateGame } from "@pointcontrol/types";
 import { createGameSchema } from "@pointcontrol/types";
 import { useRouter } from "next/navigation";
-import { type BaseSyntheticEvent } from "react";
 import { trpcClient } from "../../util/trpc";
 
 export default function CreateGameForm(): JSX.Element {
@@ -35,16 +34,18 @@ export default function CreateGameForm(): JSX.Element {
 
   const router = useRouter();
 
-  async function onSubmit(
-    values: CreateGame,
-    event?: BaseSyntheticEvent,
-  ): Promise<void> {
-    event?.preventDefault();
+  async function onSubmit(values: CreateGame): Promise<void> {
     try {
-      const { slug } = await trpcClient.createGame.mutate(values);
-      router.push(`/games/${slug}`);
-    } catch (e) {
-      // TODO: Handle error
+      await trpcClient.createGame.mutate(values).then(({ slug }) => {
+        router.push(`/games/${slug}`);
+      });
+    } catch (e: unknown) {
+      // TODO: Figure out why this isn't displaying.
+      if (e instanceof Error) {
+        form.setError("root", { type: "custom", message: e.message });
+        return;
+      }
+      form.setError("root", { type: "custom", message: "Unknown error" });
     }
   }
 
@@ -52,12 +53,11 @@ export default function CreateGameForm(): JSX.Element {
     <Form {...form}>
       <form
         className="space-y-8"
-        onSubmit={() =>
-          form.handleSubmit(
-            (data: CreateGame, event?: BaseSyntheticEvent) =>
-              void onSubmit(data, event),
-          )
-        }
+        onSubmit={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          void form.handleSubmit(onSubmit)(event);
+        }}
       >
         <FormField
           control={form.control}
