@@ -5,6 +5,7 @@ import {
 } from "@trpc/client";
 import { createTRPCNext } from "@trpc/next";
 import type { AppRouter } from "@pointcontrol/api/src/index";
+import superjson from "superjson";
 
 function getBaseUrl(): string {
   if (typeof window !== "undefined")
@@ -38,4 +39,5 @@ export const trpc = createTRPCNext<AppRouter>({
 export const trpcClient: CreateTRPCProxyClient<AppRouter> =
   createTRPCProxyClient<AppRouter>({
     links,
+    transformer: superjson,
   });
