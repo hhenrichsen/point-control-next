@@ -1,5 +1,10 @@
 version: '3'
 services:
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - '8080:8080'
   db:
     image: postgres:15
     restart: always
