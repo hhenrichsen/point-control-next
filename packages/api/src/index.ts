@@ -2,6 +2,7 @@ import { TRPCError } from "@trpc/server";
 import slug from "slug";
 import { type PublicGame, createGameSchema } from "@pointcontrol/types";
 import * as z from "zod";
+import { GamePermission } from "@pointcontrol/db/lib/generated/client";
 import { authedProcedure, publicProcedure, router } from "./trpc";
 
 const PublicGameFields = {
@@ -75,6 +76,49 @@ export const appRouter = router({
           approval: input.approval ?? false,
         },
         select: PublicGameFields,
+      });
+
+      await prisma.gameRole.create({
+        data: {
+          gameId: game.slug,
+          name: "Admin",
+          color: "ff0000",
+          position: 0,
+          permissions: [GamePermission.ADMIN],
+        },
+      });
+
+      await prisma.gameRole.create({
+        data: {
+          gameId: game.slug,
+          name: "Moderator",
+          color: "#fab000",
+          position: 0,
+          permissions: [
+            GamePermission.VIEW,
+            GamePermission.PLAY,
+            GamePermission.EDIT,
+          ],
+        },
+      });
+
+      const userRole = await prisma.gameRole.create({
+        data: {
+          gameId: game.slug,
+          name: "User",
+          color: "ffffff",
+          position: 0,
+          permissions: [GamePermission.VIEW, GamePermission.PLAY],
+        },
+      });
+
+      await prisma.game.update({
+        where: {
+          id: game.id,
+        },
+        data: {
+          defaultRoleId: userRole.id,
+        },
       });
 
       return game;
