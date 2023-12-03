@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "@pointcontrol/ui/components/button";
+import { RootClientComponent } from "./client";
 
 export default function Home(): JSX.Element {
   return (
@@ -29,6 +30,7 @@ export default function Home(): JSX.Element {
           </a>
         </p>
       </div>
+      <RootClientComponent />
     </div>
   );
 }

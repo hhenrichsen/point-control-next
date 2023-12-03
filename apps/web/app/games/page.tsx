@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Skeleton } from "@pointcontrol/ui";
 import type { PublicGame } from "@pointcontrol/types";
 import { trpcClient } from "../../util/trpc";
+import { GameIndexClientComponent } from "./client";
 
 export default function GameList(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(true);
@@ -25,6 +26,7 @@ export default function GameList(): JSX.Element {
 
   return (
     <>
+      <GameIndexClientComponent />
       <h1 className="mb-8 text-2xl">Game List</h1>
       {loading ? (
         <div className="items-begin flex w-full max-w-prose flex-col rounded-md bg-slate-50 p-8 dark:bg-slate-900">

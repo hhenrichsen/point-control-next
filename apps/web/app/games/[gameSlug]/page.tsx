@@ -1,5 +1,6 @@
 import { prisma } from "@pointcontrol/db/lib/prisma";
 import { notFound } from "next/navigation";
+import { GameDetailClientComponent } from "./client";
 
 export default async function GameHome({
   params,
@@ -16,5 +17,5 @@ export default async function GameHome({
     return notFound();
   }
 
-  return <h1>{game.name}</h1>;
+  return <GameDetailClientComponent game={game} />;
 }
