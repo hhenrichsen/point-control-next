@@ -18,7 +18,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import type { CreateGame } from "@pointcontrol/types";
 import { createGameSchema } from "@pointcontrol/types";
 import { useRouter } from "next/navigation";
-import { trpcClient } from "../../util/trpc";
 
 export default function CreateGameForm(): JSX.Element {
   const form = useForm<CreateGame>({
@@ -32,21 +31,21 @@ export default function CreateGameForm(): JSX.Element {
     },
   });
 
-  const router = useRouter();
+  const _router = useRouter();
 
-  async function onSubmit(values: CreateGame): Promise<void> {
-    try {
-      await trpcClient.createGame.mutate(values).then(({ slug }) => {
-        router.push(`/games/${slug}`);
-      });
-    } catch (e: unknown) {
-      // TODO: Figure out why this isn't displaying.
-      if (e instanceof Error) {
-        form.setError("root", { type: "custom", message: e.message });
-        return;
-      }
-      form.setError("root", { type: "custom", message: "Unknown error" });
-    }
+  function onSubmit(_values: CreateGame): void {
+    // try {
+    //   await trpcClient.createGame.mutate(values).then(({ slug }) => {
+    //     router.push(`/games/${slug}`);
+    //   });
+    // } catch (e: unknown) {
+    //   // TODO: Figure out why this isn't displaying.
+    //   if (e instanceof Error) {
+    //     form.setError("root", { type: "custom", message: e.message });
+    //     return;
+    //   }
+    //   form.setError("root", { type: "custom", message: "Unknown error" });
+    // }
   }
 
   return (

@@ -1,6 +1,5 @@
 "use client";
 
-import { useAuth, UserButton } from "@clerk/nextjs";
 import { DarkToggle } from "@pointcontrol/ui";
 import { useAtom } from "jotai";
 import { UserCircle2 } from "lucide-react";
@@ -9,12 +8,9 @@ import Link from "next/link";
 import { currentSubpage } from "./currentsubpage";
 
 export function ClientHeader(): JSX.Element {
-  const auth = useAuth();
   const subpage = useAtom(currentSubpage)[0];
 
-  const authButton = auth.userId ? (
-    <UserButton afterSignOutUrl="/" />
-  ) : (
+  const authButton = (
     <Link
       className="text-bold flex flex-row items-center justify-center"
       href="/auth/login"

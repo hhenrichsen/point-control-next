@@ -6,7 +6,8 @@
   },
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev",
+    "start": "node apps/web/.next/standalone/apps/web/server.js",
+    "dev": "turbo run dev --parallel",
     "format": "turbo format --continue -- --cache --cache-location=node_modules/.cache/.prettiercache",
     "format:fix": "turbo format --continue -- --write --cache --cache-location=node_modules/.cache/.prettiercache",
     "lint": "turbo lint --continue -- --cache --cache-location node_modules/.cache/.eslintcache && manypkg check",
